@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sign Up</title>
+    </head>
+
+    <body>
+
+        {% if registered %}
+        <strong>Thank you for registering!</strong>
+        <a href="home">Return to the homepage.</a><br />
+        {% else %}
+        <strong>Sign Up Here!</strong><br />
+
+        <form id="user_form" method="post" action="signup"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+            <p>Please enter your personal details</p>
+            {{ user_form.as_p }}
+            <br></br>
+            <p>Please enter your library details</p>
+            {{ library_form.as_p }}
+
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
+    </body>
+</html>
