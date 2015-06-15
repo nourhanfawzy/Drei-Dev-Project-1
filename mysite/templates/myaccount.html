@@ -1,1 +1,29 @@
-Heyyyy
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Account</title>
+</head>
+
+<body>
+  <p>My Account</p>
+  <br></br>
+
+	<h3>Library Owner Details </h3>
+	<br>
+  <label>First Name: {{user.first_name}}</label>
+  <br></br>
+  <label>Last Name: {{user.last_name}}</label>
+  <br></br>
+  <label>Email: {{user.email}}</label>
+  <br></br>
+
+    <h3>Library Details </h3>
+    <br>
+  <label>Library Name: {{user_library.name}}</label>
+  <br></br>
+  <label>Library Location: {{user_library.location}}</label>
+  <br></br>
+  <a href="{% url 'editaccount' user.id %}">Edit your information </a>
+</body>
+
+</html>

@@ -28,17 +28,26 @@ def user_account(request, u_id):
         user.email = request.POST['email']
         user.save()
 
-        user.password = request.POST['newpassword']
+        user.set_password = request.POST['newpassword']
         user.save()
 
-        user_library.name = request.POST['libraryname']
+        user_library.name = request.POST['library_name']
         user_library.save()
 
-        user_library.location = request.POST['librarylocation']
+        user_library.location = request.POST['library_location']
         user_library.save()
 
     return render_to_response(
         'myaccount.html', {'user': user, 'user_library': user_library},
+        context_instance=RequestContext(request))
+
+
+def user_edit_account(request, u_id):
+    user = User.objects.get(id=u_id)
+    user_library = Library.objects.get(created_by=user)
+
+    return render_to_response(
+        'editaccount.html', {'user': user, 'user_library': user_library},
         context_instance=RequestContext(request))
 
 

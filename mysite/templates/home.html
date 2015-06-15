@@ -8,14 +8,14 @@
 
 {% if registered %}
 <br></br>
-<a href="myaccount/{{ user.id }}" class="text">My Account</a>
+<a href="{% url 'myaccount' user.id %}" class="text">My Account</a>
 <br></br>
-<a href="signout" class="text">Sign Out</a><br />
+<a href="{% url 'signout' %}" class="text">Sign Out</a><br />
 {% else %}
 <br></br>
-<a href="signup" class="text">Sign Up Here</a>
+<a href="{% url 'signup' %}" class="text">Sign Up Here</a>
 <br></br>
-<a href="signin" class="text">Sign In</a><br />
+<a href="{% url 'signin' %}" class="text">Sign In</a><br />
 {% endif %}
 </div>
 

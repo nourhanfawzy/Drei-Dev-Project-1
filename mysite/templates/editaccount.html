@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+<title> Edit Account </title>
+</head>
+<body>
+
+          <h3>Edit your personal information</h3>
+
+          <form action="{% url 'myaccount' user.id %}" method="post">{% csrf_token %}
+
+            <h3>Library Owner Details </h3>
+            <br>
+            <label for="fisrtname">First Name</label>
+            <input type="text" name="firstname" spellcheck="false" value="{{ user.first_name }}"/>
+
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" spellcheck="false"  value="{{ user.last_name }}"/>
+
+            <label for="email">Email</label>
+            <input type="text" name="email" spellcheck="false" value="{{ user.email }}"/>
+
+            <label for="oldpassword">Old Password</label>
+            <input type="password" name="oldpassword" />
+
+            <label for="newpassword">New Password</label>
+            <input type="password" name="newpassword" />
+
+            <label for="password-again">Confirm Password</label>
+            <input type="password" name="password-again" />
+
+            <h3>Library Details </h3>
+            <br>
+            <label for="companyname">Library Name</label>
+            <input type="text" name="library_name" spellcheck="false" value="{{ user_library.name }}"/>
+
+            <label for="companyname">Library Location</label>
+            <input type="text" name="library_location" spellcheck="false" value="{{ user_library.location }}"/>
+
+
+            <input type="submit" value="Submit Changes" />
+
+          </form>
+
+  </body>
