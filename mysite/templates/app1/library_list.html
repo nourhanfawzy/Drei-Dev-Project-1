@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book List</title>
+    </head>
+
+    <body>
+        <h1>Hello There</h1>
+
+		<h2>Libraries</h2>
+
+		<ul>
+
+		{% for library in object_list %}
+
+        <a href = "{% url 'library_detail' library.id %}"> 
+        <li>Name = {{ library.name }}</li> </a>
+
+		{% empty %}
+
+    	<li>No Libraries Currently Available.</li>
+
+		{% endfor %}
+		
+		</ul>
+
+        <br></br>
+
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+
+    </body>
+</html>

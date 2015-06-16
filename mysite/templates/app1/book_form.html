@@ -1,0 +1,11 @@
+
+
+{{book_form.errors}}
+<form method="post" action="{% url 'book_form' library_id %}">{% csrf_token %}
+    {{ book_form.management_form }}
+    {{ book_form.as_p }}
+            <br><hr>
+
+
+    <input type='submit'>
+</form>

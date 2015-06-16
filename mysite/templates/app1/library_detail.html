@@ -1,0 +1,26 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Library Details</title>
+    </head>
+
+    <body>
+
+        	<br></br>
+			<h3>Library Details</h3>
+			<br></br>
+			<p>Library Name: {{ object.name }}</p>
+			<p>Library Location: {{ object.location }}</p>
+			<p>Library Owner: {{ object.created_by.username }}</p>
+
+
+	<br></br>
+	<a href="{% url 'book_list' object.id %}"> View library books</a>
+	<br>
+	<a href=""> Go back</a>
+
+    </body>
+</html>

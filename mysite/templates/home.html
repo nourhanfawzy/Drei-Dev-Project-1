@@ -8,15 +8,27 @@
 
 {% if registered %}
 <br></br>
-<a href="{% url 'myaccount' user.id %}" class="text">My Account</a>
+<a href="{% url 'my_account' user.id %}" class="text">My Account</a>
 <br></br>
-<a href="{% url 'signout' %}" class="text">Sign Out</a><br />
+<a href="{% url 'book_form' user_library.id %}" class="text">Add A New Book To My Library</a>
+<br></br>
+<a href="{% url 'book_list' user_library.id %}" class="text">View My Library Books</a>
+<br></br>
+<a href="{% url 'notification_list' user.id %}" class="text">View My Notifications</a>
+<br></br>
+<a href="{% url 'postman_inbox' %}"  class="text">View My Messages</a>
+<br></br>
+<a href="{% url 'sign_out' %}" class="text">Sign Out</a><br/>
 {% else %}
 <br></br>
-<a href="{% url 'signup' %}" class="text">Sign Up Here</a>
+<a href="{% url 'sign_up' %}" class="text">Sign Up Here</a>
 <br></br>
-<a href="{% url 'signin' %}" class="text">Sign In</a><br />
+<a href="{% url 'sign_in' %}" class="text">Sign In</a><br/>
 {% endif %}
+
+<br></br>
+<a href="{% url 'library_list' %}" class="text">View All Website Libraries</a>
+
 </div>
 
 </body>

@@ -1,0 +1,57 @@
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Book Details</title>
+    </head>
+
+    <body>
+
+    {% if object.library.created_by == user %}
+
+    <form action="{% url 'book_update' object.library.id %}" method="get"> {% csrf_token %}
+
+        	<br></br>
+			<h3>Book Details</h3>
+			<p>Name: {{ object.name }}</p>
+
+			<p>Year: {{ object.year }}</p>
+
+			<p>About: {{ object.about }}</p>
+
+			<p>Library Name: {{ object.library.name }}</p>
+
+			<p>Library Location: {{ object.library.location }}</p>
+
+			<p>Library Owner: {{ object.library.created_by.username }}</p>
+
+
+			<input type="submit" value="Edit Book Details"></input>
+
+	</form>
+
+	{% else %}
+
+	        <br></br>
+			<h3>Book Details</h3>
+			<p>Name: {{ object.name }}</p>
+
+			<p>Year: {{ object.year }}</p>
+
+			<p>About: {{ object.about }}</p>
+
+			<p>Library Name: {{ object.library.name }}</p>
+
+			<p>Library Location: {{ object.library.location }}</p>
+
+			<p>Library Owner: {{ user.username }}</p>
+
+	{% endif %}
+
+	<br></br>
+	<a href=""> Go back</a>
+
+    </body>
+</html>

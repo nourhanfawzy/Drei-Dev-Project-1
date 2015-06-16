@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Library Book List</title>
+    </head>
+
+    <body>
+        <h1>Hello There</h1>
+
+		<h2>Library Books</h2>
+
+		<ul>
+
+		{% for b in object_list %}
+
+        {% if b.library.created_by == user %}
+
+        <form action="{% url 'book_delete' b.id %}" method="get"> {% csrf_token %}
+
+    	<a href = "{% url 'book_detail' b.id %}"> 
+        <li>Name = {{ b.name }}</li> </a>
+        <input type="submit" value="Delete"></input>
+
+        <br></br>
+
+        </form>
+
+        {% else %}
+
+        <a href = "{% url 'book_detail' b.id %}"> 
+        <li>Name = {{ b.name }}</li> </a>
+
+        {% endif %}
+
+
+		{% empty %}
+    	<li>No Books yet.</li>
+		{% endfor %}
+		
+		</ul>
+
+        <br></br>
+
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% endif %}
+            </span>
+        </div>
+
+        <br>
+
+        <a href="{ url 'home' }"> Go back</a>
+
+    </body>
+</html>

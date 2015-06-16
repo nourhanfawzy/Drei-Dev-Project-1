@@ -2,20 +2,22 @@ from app1.models import Library
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, RequestContext
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from app1.forms import UserForm, LibraryForm
 from django.core.urlresolvers import reverse
 # Create your views here.
 
 
-def home(request):
-    return render_to_response(
-        'home.html', {}, context_instance=RequestContext(request))
+def user_account(request, user_id):
+    """
+    A function used to display the user account details.
+    :author Nourhan Fawzy:
+    :param request, user_id:
+    :return render_to_response:
+    """
 
-
-def user_account(request, u_id):
-    user = User.objects.get(id=u_id)
+    user = User.objects.get(id=user_id)
     user_library = Library.objects.get(created_by=user)
 
     if request.POST:
@@ -28,7 +30,7 @@ def user_account(request, u_id):
         user.email = request.POST['email']
         user.save()
 
-        user.set_password = request.POST['newpassword']
+        user.set_password(request.POST['newpassword'])
         user.save()
 
         user_library.name = request.POST['library_name']
@@ -38,20 +40,34 @@ def user_account(request, u_id):
         user_library.save()
 
     return render_to_response(
-        'myaccount.html', {'user': user, 'user_library': user_library},
+        'my_account.html', {'user': user, 'user_library': user_library},
         context_instance=RequestContext(request))
 
 
-def user_edit_account(request, u_id):
-    user = User.objects.get(id=u_id)
+def user_edit_account(request, user_id):
+    """
+    A function used to edit user account details.
+    :author Nourhan Fawzy:
+    :param request, user_id:
+    :return render_to_response:
+    """
+
+    user = User.objects.get(id=user_id)
     user_library = Library.objects.get(created_by=user)
 
     return render_to_response(
-        'editaccount.html', {'user': user, 'user_library': user_library},
+        'edit_account.html', {'user': user, 'user_library': user_library},
         context_instance=RequestContext(request))
 
 
 def user_signup(request):
+    """
+    A function used to allow user to sign up.
+    :author Nourhan Fawzy:
+    :param request:
+    :return render_to_response:
+    """
+
     registered = False
 
     if request.method == 'POST':
@@ -74,8 +90,9 @@ def user_signup(request):
         user_form = UserForm()
         library_form = LibraryForm()
         return render_to_response(
-            'signup.html',
-            {'user_form': user_form, 'library_form': library_form},
+            'sign_up.html',
+            {'user_form': user_form, 'library_form': library_form,
+            'registered': registered},
             context_instance=RequestContext(request))
 
     return render_to_response(
@@ -85,6 +102,13 @@ def user_signup(request):
 
 
 def user_signin(request):
+    """
+    A function used to allow user to sign in.
+    :author Nourhan Fawzy:
+    :param request:
+    :return render_to_response:
+    """
+
     context = RequestContext(request)
     registered = False
     if request.method == 'POST':
@@ -107,11 +131,18 @@ def user_signin(request):
             print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render_to_response('signin.html', {}, context)
+        return render_to_response('sign_in.html', {}, context)
 
 
-@login_required
+# @login_required
 def user_signout(request):
+    """
+    A function used to allow user to sign out.
+    :author Nourhan Fawzy:
+    :param request:
+    :return HttpResponseRedirect:
+    """
+
     logout(request)
     url = reverse('home')
     return HttpResponseRedirect(url)
